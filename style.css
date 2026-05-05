@@ -2,9 +2,9 @@ body {
   font-family: 'Segoe UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f8f8f8;
-  color: #222;
-  line-height: 1.6;
+  background: #f8f9fa;
+  color: #0a2a5c;
+  line-height: 1.7;
 }
 
 header {
@@ -72,6 +72,22 @@ header h1 {
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
+/* トップページ専用レイアウト */
+.page-top {
+  background: transparent;
+  box-shadow: none;
+  padding: 1rem;
+}
+
+.page-top section {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 43, 92, 0.08);
+  border-bottom: none;
+}
+
 section {
   margin-bottom: 4rem;
 }
@@ -82,54 +98,129 @@ h2 {
   padding-left: 1rem;
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
+  font-weight: 900;
+}
+
+/* ヒーローバナー */
+.hero {
+  text-align: center;
+  padding: 2.5rem 1rem 2rem;
+}
+
+.hero-catch {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #005bac;
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.hero-sub {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #005bac;
+  margin: 0 0 1.2rem;
+}
+
+.hero-desc {
+  font-size: 1rem;
+  color: #0a2a5c;
+  margin: 0;
+  line-height: 1.8;
+}
+
+.note {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #0a2a5c;
 }
 
 /* お悩みセクションの装飾 */
 .pain-points {
-  background: #fff9f0;
-  border: 1px solid #ffe0b2;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-top: 2rem;
-}
-
-.pain-points h3 {
-  margin-top: 0;
-  font-size: 1.1rem;
-  color: #d84315;
+  padding: 0.5rem 0 0;
 }
 
 .pain-points ul {
   list-style: none;
   padding: 0;
+  margin: 0 0 1rem;
 }
 
 .pain-points li {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.9rem;
   display: flex;
   align-items: flex-start;
+  font-size: 1rem;
 }
 
 .pain-points li span {
-  background: #d84315;
+  background: #005bac;
   color: #fff;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   font-size: 0.8rem;
+  font-weight: bold;
   margin-right: 10px;
   flex-shrink: 0;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .message {
   font-weight: bold;
+  font-size: 1.05rem;
   text-align: center;
   margin-top: 1rem;
-  color: #333;
+  color: #005bac;
+  border-top: 2px solid rgba(0, 91, 172, 0.3);
+  padding-top: 1rem;
+}
+
+/* 製品・サービスブロック */
+.plans-block {
+  margin-bottom: 2rem;
+}
+
+.plans-block-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #005bac;
+  margin: 0 0 0.8rem;
+}
+
+.plans-block-lead {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+}
+
+.plans-service-list {
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.plans-service-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* 料金ブロック */
+.plans-pricing {
+  background: #fff5f3;
+  border-left: 4px solid #cc2200;
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.pricing-highlight {
+  font-weight: bold;
+  font-size: 1.05rem;
+  color: #cc2200;
+  margin: 0 0 0.5rem;
+  line-height: 1.7;
 }
 
 /* 3カラムカードレイアウト */
@@ -141,11 +232,12 @@ h2 {
 }
 
 .service-card {
-  border: 1px solid #ddd;
+  border: 1px solid #c8d8ec;
   border-radius: 8px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background: #ffffff;
 }
 
 .card-header {
@@ -164,7 +256,7 @@ h2 {
   font-size: 0.9rem;
   font-weight: bold;
   margin-bottom: 0.8rem;
-  border-bottom: 1px dashed #ccc;
+  border-bottom: 1px dashed #005bac;
   padding-bottom: 0.5rem;
 }
 
@@ -202,14 +294,16 @@ h2 {
 }
 
 .company-table th, .company-table td {
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid rgba(0, 91, 172, 0.2);
   text-align: left;
 }
 
 .company-table th {
   width: 30%;
-  background: #f9f9f9;
+  background: #f8f9fa;
+  font-weight: bold;
+  color: #005bac;
 }
 
 .header-logo-title {
@@ -223,9 +317,53 @@ h2 {
 }
 
 footer {
+  background: #003087;
+  color: #fff;
+  padding: 2rem 1rem 1rem;
+  margin-top: 2rem;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.footer-logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-logo {
+  height: 50px;
+  border-radius: 50%;
+}
+
+.footer-company {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.footer-info {
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.footer-info p {
+  margin: 0;
+}
+
+.footer-copy {
   text-align: center;
-  padding: 2rem;
-  background: #eee;
+  font-size: 0.8rem;
+  margin: 1rem 0 0;
+  opacity: 0.7;
 }
 
 @media (max-width: 768px) {
@@ -238,6 +376,16 @@ footer {
   }
   .container {
     margin-top: 180px;
+  }
+  .hero-catch {
+    font-size: 2rem;
+  }
+  .hero-sub {
+    font-size: 1.2rem;
+  }
+  .footer-inner {
+    flex-direction: column;
+    gap: 1rem;
   }
 }
 
