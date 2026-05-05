@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>労働をなくす | 合同会社優豊電算</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-70LXJXMWWR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-70LXJXMWWR');
+  </script>
+  <script src="menu.js"></script>
+  <script src="backnumber/data.js"></script>
+</head>
+
+<body>
+  <header></header>
+
+  <div class="container">
+    <main class="main-content main-content--wide">
+      <section id="backnumber">
+        <h2>労働をなくす DX通信 バックナンバー</h2>
+        <p>「労働をなくす」最新テクノロジー活用術をお届けするメールマガジンのバックナンバーです。</p>
+
+        <div id="bn-count" class="bn-count"></div>
+        <div id="bn-grid" class="bn-grid"></div>
+        <div id="bn-pagination" class="bn-pagination"></div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 合同会社優豊電算</p>
+  </footer>
+
+  <script>
+    const ITEMS_PER_PAGE = 40;
+    let currentPage = 1;
+    // data.js で定義された backnumberData を使用（fetch不要・ローカルでも動作）
+    const allData = [...backnumberData].sort((a, b) => b.date.localeCompare(a.date));
+
+    function renderPage(page) {
+      currentPage = page;
+      const start = (page - 1) * ITEMS_PER_PAGE;
+      const end = start + ITEMS_PER_PAGE;
+      const items = allData.slice(start, end);
+      const totalPages = Math.ceil(allData.length / ITEMS_PER_PAGE);
+
+      // 件数表示
+      document.getElementById('bn-count').textContent =
+        `全 ${allData.length} 号（${page} / ${totalPages} ページ）`;
+
+      // カード描画
+      const grid = document.getElementById('bn-grid');
+      if (items.length === 0) {
+        grid.innerHTML = '<p style="color:#888;">バックナンバーはまだありません。</p>';
+      } else {
+        grid.innerHTML = items.map(item => {
+          const isLink = item.url && item.url !== '#';
+          const tag = isLink ? 'a' : 'div';
+          const href = isLink ? `href="${item.url}"` : '';
+          return `
+            <${tag} ${href} class="bn-card" title="${item.title}">
+              <img
+                src="${item.image}"
+                alt="${item.title}"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              >
+              <div class="bn-card-overlay">
+                <span class="bn-card-date">${item.label || item.title}</span>
+                ${item.description ? `<span class="bn-card-desc">${item.description}</span>` : ''}
+              </div>
+            </${tag}>
+          `;
+        }).join('');
+      }
+
+      renderPagination(totalPages);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderPagination(totalPages) {
+      const pagination = document.getElementById('bn-pagination');
+      if (totalPages <= 1) {
+        pagination.innerHTML = '';
+        return;
+      }
+
+      let html = '';
+
+      // 前へボタン
+      html += `<button class="bn-page-btn" onclick="renderPage(${currentPage - 1})"
+        ${currentPage === 1 ? 'disabled' : ''}>‹ 前へ</button>`;
+
+      // ページ番号（前後2ページ、最大5つ）
+      let startPage = Math.max(1, currentPage - 2);
+      let endPage = Math.min(totalPages, startPage + 4);
+      if (endPage - startPage < 4) {
+        startPage = Math.max(1, endPage - 4);
+      }
+
+      if (startPage > 1) {
+        html += `<button class="bn-page-btn" onclick="renderPage(1)">1</button>`;
+        if (startPage > 2) html += `<span class="bn-page-ellipsis">…</span>`;
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        html += `<button class="bn-page-btn ${i === currentPage ? 'active' : ''}"
+          onclick="renderPage(${i})">${i}</button>`;
+      }
+
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) html += `<span class="bn-page-ellipsis">…</span>`;
+        html += `<button class="bn-page-btn" onclick="renderPage(${totalPages})">${totalPages}</button>`;
+      }
+
+      // 次へボタン
+      html += `<button class="bn-page-btn" onclick="renderPage(${currentPage + 1})"
+        ${currentPage === totalPages ? 'disabled' : ''}>次へ ›</button>`;
+
+      pagination.innerHTML = html;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => renderPage(1));
+  </script>
+</body>
+
+</html>

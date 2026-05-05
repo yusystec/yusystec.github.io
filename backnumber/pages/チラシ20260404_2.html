@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>労働をなくすDX通信 2026年4月版 第2号</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #f5f5f5;
+  }
+
+  .wrapper {
+    max-width: 640px;
+    margin: 0 auto;
+    background: #fff;
+  }
+
+  /* ヘッダー */
+  .header {
+    background: #f5c400;
+    padding: 24px 28px 20px;
+    text-align: center;
+  }
+
+  .header-title {
+    font-size: 32px;
+    font-weight: 900;
+    color: #1a5fa8;
+    letter-spacing: 2px;
+    line-height: 1.2;
+  }
+
+  .header-edition {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    margin-left: 8px;
+  }
+
+  .header-sub {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-top: 10px;
+    line-height: 1.9;
+  }
+
+  .header-sub .highlight {
+    font-size: 15px;
+  }
+
+  /* トピックセクション */
+  .topics {
+    padding: 20px 20px;
+    background: #f5c400;
+  }
+
+  .topic-box {
+    background: #fff;
+    border: 2px solid #1a1a1a;
+    border-radius: 4px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+
+  .topic-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+    border-bottom: 1.5px solid #ddd;
+    padding-bottom: 8px;
+  }
+
+  .topic-title .topic-num {
+    color: #1a5fa8;
+  }
+
+  /* 画像＋メタ情報エリア：PCは横並び、スマホは縦積み */
+  .topic-meta-wrap {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+    margin-bottom: 12px;
+  }
+
+  .topic-image {
+    flex: 0 0 250px;
+    width: 250px;
+    min-height: 180px;
+    background: #e8e8e8;
+    border: 1.5px dashed #aaa;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .topic-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+  }
+
+  .topic-image-placeholder {
+    font-size: 10px;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    padding: 4px;
+  }
+
+  .topic-image img ~ .topic-image-placeholder {
+    display: none;
+  }
+
+  /* モーダル */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+
+  .modal-overlay.active {
+    display: flex;
+  }
+
+  .modal-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    cursor: default;
+  }
+
+  .modal-close {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .topic-meta {
+    flex: 1;
+    background: #f9f9f9;
+    border-left: 3px solid #f5c400;
+    padding: 8px 12px;
+    font-size: 12px;
+    line-height: 2;
+    color: #333;
+  }
+
+  .topic-meta strong {
+    color: #1a1a1a;
+  }
+
+  .topic-body {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #333;
+  }
+
+  .topic-body .red {
+    color: #1a5fa8;
+    font-weight: 700;
+  }
+
+  /* まとめ */
+  .summary {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 20px 24px;
+    margin: 0 20px 20px;
+    border-radius: 4px;
+  }
+
+  .summary-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: #f5c400;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 6px;
+  }
+
+  .summary-body {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #ddd;
+  }
+
+  /* フッター */
+  .footer {
+    background: #f5c400;
+    padding: 8px 20px 16px;
+    font-size: 10px;
+    color: #555;
+    line-height: 1.7;
+    border-top: 2px solid #d4a900;
+  }
+
+  .footer strong {
+    color: #1a1a1a;
+  }
+
+  /* =============================
+     スマホ対応（480px以下）
+     ============================= */
+  @media (max-width: 480px) {
+    .wrapper {
+      max-width: 100%;
+    }
+
+    .header {
+      padding: 16px 16px 14px;
+    }
+
+    .header-title {
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .header-edition {
+      font-size: 12px;
+    }
+
+    .header-sub {
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .header-sub .highlight {
+      font-size: 13px;
+    }
+
+    .topics {
+      padding: 12px 12px;
+    }
+
+    .topic-box {
+      padding: 12px 12px;
+      margin-bottom: 10px;
+    }
+
+    .topic-title {
+      font-size: 13px;
+    }
+
+    /* スマホでは画像を上・メタ情報を下に縦積み */
+    .topic-meta-wrap {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .topic-image {
+      flex: none;
+      width: 100%;
+      height: 180px;
+      min-height: unset;
+    }
+
+    .topic-meta {
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .topic-body {
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .summary {
+      margin: 0 0 12px;
+      padding: 14px 14px;
+    }
+
+    .summary-title {
+      font-size: 13px;
+    }
+
+    .summary-body {
+      font-size: 12px;
+    }
+
+    .footer {
+      padding: 8px 12px 14px;
+      font-size: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ヘッダー -->
+  <div class="header">
+    <div>
+      <span class="header-title">労働をなくすDX通信</span>
+      <span class="header-edition">2026年4月第2号</span>
+    </div>
+    <div class="header-sub">
+      「労働をなくす」最新テクノロジー活用術<br>
+      <span class="highlight">労働を減らせる製品、サービスを厳選してお届けします。</span><br>
+      早く、安く、安全に試せるものをピックアップしています。<br>
+      貴社の業務負担を少しでも楽にできれば幸いです。
+    </div>
+  </div>
+
+  <!-- トピック群 -->
+  <div class="topics">
+
+    <!-- Topic 1 -->
+    <div class="topic-box">
+      <div class="topic-title">
+        <span class="topic-num">Topic 1：</span>ファイルをチーム内共有！探すのも簡単！
+      </div>
+      <div class="topic-meta-wrap">
+        <div class="topic-image">
+          <img src="https://crimson-voice-e6b2.yusystec.workers.dev/topic_202604_2_1.png" alt="TOPIC1">
+          <div class="topic-image-placeholder">画像を<br>ここに<br>挿入</div>
+        </div>
+        <div class="topic-meta">
+          <strong>【サービス名】</strong> … Google Drive<br>
+          <strong>【費用】</strong> … 800円/月～ (Google Workspace契約推奨)<br>
+          <strong>【導入時間】</strong> …  約30分 (1ユーザーの場合)<br>
+          <strong>【公式URL】</strong> … <a href="https://workspace.google.co.jp">link</a>
+        </div>
+      </div>
+      <div class="topic-body">
+        スキャンした名刺がチームで共有されてない、どこにあるか分からない、名前を思い出せない、といったお悩みはありませんか？
+<br>Google Driveでは簡単にチーム内でファイルを共有できます。
+<br>また項目・全文検索のほか、覚えている断片的な情報を基にGeminiに尋ねるといったファイルの探し方ができます。
+<br>(GeminiはGoogleが提供するAIサービスです。)
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="topic-box">
+      <div class="topic-title">
+        <span class="topic-num">Topic 2：</span>名刺管理アプリを簡単作成！
+      </div>
+      <div class="topic-meta-wrap">
+        <div class="topic-image">
+          <img src="https://crimson-voice-e6b2.yusystec.workers.dev/topic_202604_2_2.png" alt="TOPIC2">
+          <div class="topic-image-placeholder">画像を<br>ここに<br>挿入</div>
+        </div>
+        <div class="topic-meta">
+          <strong>【サービス名】</strong> … GAS(Google Apps Script)<br>
+          <strong>【費用】</strong> …  0円～<br>
+          <strong>【導入時間】</strong> … 約1時間 (設定&スクリプト作成)<br>
+          <strong>【公式URL】</strong> … <a href="https://developers.google.com/apps-script">link</a>
+        </div>
+      </div>
+      <div class="topic-body">
+        名刺の情報をExcelに転記したり、名刺ファイルの名前を手作業で変更するのを面倒臭く感じたことはありませんか？
+<br>GASを利用することで、Google Driveの名刺ファイルを見つけ、ファイル名を設定した形式に統一するほか、名刺をリスト化したファイルを作成・更新できます。利用にはスクリプトを作成する必要がありますが、Geminiで簡単に生成することが可能です。
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="topic-box">
+      <div class="topic-title">
+        <span class="topic-num">Topic 3：</span>無料！連携可！オフラインでOCRを利用できる！
+      </div>
+      <div class="topic-meta-wrap">
+        <div class="topic-image">
+          <img src="https://crimson-voice-e6b2.yusystec.workers.dev/topic_202604_2_3.png" alt="TOPIC3">
+          <div class="topic-image-placeholder">画像を<br>ここに<br>挿入</div>
+        </div>
+        <div class="topic-meta">
+          <strong>【製品名】</strong> … Gemma4<br>
+          <strong>【費用】</strong> … 0円<br>
+          <strong>【導入時間】</strong> … 約15分 (インストール&設定)<br>
+          <strong>【公式URL】</strong> … <a href="https://ai.google.dev/gemma/docs/core">link</a>
+        </div>
+      </div>
+      <div class="topic-body">
+        OCRサービスは便利。だけど料金やセキュリティが気になる、ネットが接続できない環境から利用したい、といったお悩みはありませんか？
+<br>Gemma4なら一般的なノートPCでも名刺のOCRが可能です。
+<br>なお、前回号で取り上げたLM Studioを利用することで、簡単にGemma4の利用が開始できます。
+      </div>
+    </div>
+
+    <!-- まとめ -->
+    <div class="summary">
+      <div class="summary-title">【まとめ】</div>
+      <div class="summary-body">
+        今回は名刺管理を例に、OCRとファイル管理をテーマにご紹介しました。上記サービスにより、名刺だけでなく見積書、請求書、等の他画像ファイルの読み取り、整理・検索・共有ができます。
+<br>記事の内容について気になる点がございましたら、お気軽にご相談ください。
+      </div>
+    </div>
+
+  </div><!-- /topics -->
+
+  <!-- フッター -->
+  <div class="footer">
+    <strong>【商標・免責事項】</strong><br>
+    Google、Google Drive、Google Apps Script、および関連するロゴは Google LLC の商標です。 『労働をなくすDX通信』は独立した出版物であり、Google LLC が認定、後援、その他承認したものではありません 。本紙に掲載されているその他の社名、製品名、サービス名は各社の商標または登録商標です 。各ツールの利用規約およびAIモデルのライセンス（商用利用の可否等）は、利用者自身で最新情報をご確認ください 。掲載内容は2026年4月現在の情報であり、製品価格や仕様、動作を保証するものではありません 。
+  </div>
+
+</div>
+<!-- モーダル -->
+<div class="modal-overlay" id="modal" onclick="closeModal()">
+  <span class="modal-close" onclick="closeModal()">✕</span>
+  <img id="modal-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
+<script>
+  function openModal(img) {
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+    modal.classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // 画像にクリックイベントを付与
+  document.querySelectorAll('.topic-image img').forEach(function(img) {
+    img.addEventListener('click', function() { openModal(this); });
+  });
+</script>
+</body>
+</html>

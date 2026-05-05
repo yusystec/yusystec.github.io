@@ -3,6 +3,7 @@ const menuItems = [
   { text: '私たちについて', href: 'index.html#about' },
   { text: 'サービス概要', href: 'index.html#plans' },
   { text: '会社情報', href: 'index.html#company' },
+  { text: '労働をなくす', href: 'backnumber.html' },
   { text: '問い合わせ', href: 'index.html#contact' },
 ];
 
@@ -50,10 +51,10 @@ function generateHeader() {
 // メニューHTMLを生成する関数
 function generateMenuHTML() {
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  
+
   const menuItemsHTML = menuItems.map(item => {
     let href = item.href;
-    
+
     // 現在のページに応じてリンクを調整
     if (currentPage === 'index.html' && item.href.startsWith('index.html#')) {
       href = item.href.replace('index.html', '');
@@ -62,10 +63,10 @@ function generateMenuHTML() {
     } else {
       href = item.href;
     }
-    
+
     return `<li><a href="${href}">${item.text}</a></li>`;
   }).join('');
-  
+
   return `<ul>${menuItemsHTML}</ul>`;
 }
 
@@ -97,7 +98,7 @@ function addSmoothScroll() {
   document.querySelectorAll('.contact-button').forEach(button => {
     button.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
-      
+
       // 同じページ内のアンカーリンクの場合
       if (href.startsWith('#')) {
         e.preventDefault();
@@ -122,9 +123,9 @@ function updateActiveLinks() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.header-nav a');
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  
+
   let current = '';
-  
+
   // index.htmlの場合：スクロール位置に基づいてアクティブセクションを決定
   if (currentPage === 'index.html') {
     sections.forEach(section => {
@@ -134,11 +135,11 @@ function updateActiveLinks() {
       }
     });
   }
-  
+
   navLinks.forEach(link => {
     link.classList.remove('active');
     const href = link.getAttribute('href');
-    
+
     // index.htmlの場合：セクションリンクのハイライト
     if (currentPage === 'index.html' && href === '#' + current) {
       link.classList.add('active');
@@ -151,14 +152,14 @@ function updateActiveLinks() {
 }
 
 // ページ読み込み時にヘッダー、メニュー、電話番号を生成し、スクロール機能を追加
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   generateHeader();
   // ヘッダー生成後にスクロール機能を追加
   setTimeout(addSmoothScroll, 10);
-  
+
   // 初期状態でアクティブリンクを更新
   updateActiveLinks();
-  
+
   // スクロールイベントリスナーを追加
   window.addEventListener('scroll', updateActiveLinks);
 });

@@ -240,3 +240,144 @@ footer {
     margin-top: 180px;
   }
 }
+
+/* ===== バックナンバー一覧 ===== */
+
+.main-content--wide {
+  max-width: 1400px;
+}
+
+.bn-count {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.bn-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.bn-card {
+  aspect-ratio: 1 / 1;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  background: #e8eef5;
+  display: block;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+a.bn-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 91, 172, 0.18);
+}
+
+.bn-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bn-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 40, 90, 0.88));
+  color: #fff;
+  padding: 2.5rem 0.75rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.bn-card-date {
+  font-size: 0.75rem;
+  font-weight: bold;
+  opacity: 0.95;
+}
+
+.bn-card-desc {
+  font-size: 0.7rem;
+  line-height: 1.45;
+  opacity: 0.9;
+}
+
+/* ページネーション */
+.bn-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.bn-page-btn {
+  background: #fff;
+  border: 1px solid #005bac;
+  color: #005bac;
+  padding: 0.45rem 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+  line-height: 1;
+}
+
+.bn-page-btn:hover:not(:disabled) {
+  background: #005bac;
+  color: #fff;
+}
+
+.bn-page-btn.active {
+  background: #005bac;
+  color: #fff;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.bn-page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.bn-page-ellipsis {
+  color: #888;
+  padding: 0 0.2rem;
+  line-height: 1;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+  .bn-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+  .bn-card-date {
+    font-size: 0.65rem;
+  }
+  .bn-card-desc {
+    font-size: 0.6rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .bn-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  .bn-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
