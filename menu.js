@@ -1,6 +1,6 @@
 // 共通メニュー設定
 const menuItems = [
-  { text: '私たちについて', href: 'index.html#about' },
+  { text: '私たちについて', href: 'index.html#top' },
   { text: 'サービス概要', href: 'index.html#plans' },
   { text: '会社情報', href: 'index.html#company' },
   { text: '労働をなくす', href: 'backnumber.html' },
