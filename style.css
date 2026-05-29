@@ -101,11 +101,17 @@ header h1 {
 
 .page-top section {
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 16px;
   padding: 2rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0, 43, 92, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 43, 92, 0.06), 0 8px 24px rgba(0, 43, 92, 0.1);
   border-bottom: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.page-top section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 43, 92, 0.08), 0 14px 32px rgba(0, 43, 92, 0.13);
 }
 
 section {
@@ -114,17 +120,19 @@ section {
 
 h2 {
   color: #005bac;
-  border-left: 5px solid #005bac;
-  padding-left: 1rem;
+  border-left: 4px solid #005bac;
+  padding-left: 0.85rem;
   margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-  font-weight: 900;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
 }
 
 /* ヒーローバナー */
 .hero {
   text-align: center;
   padding: 2.5rem 1rem 2rem;
+  border-radius: 16px;
 }
 
 .hero-catch {
@@ -226,22 +234,6 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
-/* 料金ブロック */
-.plans-pricing {
-  background: #fff5f3;
-  border-left: 4px solid #cc2200;
-  border-radius: 6px;
-  padding: 1rem 1.2rem;
-  margin-top: 1.5rem;
-}
-
-.pricing-highlight {
-  font-weight: bold;
-  font-size: 1.05rem;
-  color: #cc2200;
-  margin: 0 0 0.5rem;
-  line-height: 1.7;
-}
 
 /* 3カラムカードレイアウト */
 .services-grid {
@@ -259,11 +251,18 @@ h2 {
 
 .service-card {
   border: 1px solid #c8d8ec;
-  border-radius: 8px;
+  border-radius: 14px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 43, 92, 0.06), 0 6px 18px rgba(0, 43, 92, 0.09);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 43, 92, 0.08), 0 12px 28px rgba(0, 43, 92, 0.13);
 }
 
 .card-header {
