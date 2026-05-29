@@ -30,10 +30,10 @@ function generateHeader() {
   const menuHTML = generateMenuHTML();
 
   header.innerHTML = `
-    <div class="header-logo-title">
+    <a href="index.html" class="header-logo-title">
       <img src="${headerConfig.logoPath}" alt="${headerConfig.logoAlt}" class="company-logo">
       <h1>${headerConfig.companyName}</h1>
-    </div>
+    </a>
     <nav class="header-nav">
       ${menuHTML}
     </nav>
